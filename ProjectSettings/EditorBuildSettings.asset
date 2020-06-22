@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/StoreAssets/Nokobot/ModernGuns_Handgun/DisplayScene.unity
-    guid: bc7bf4de2d3fad14b8761ce1016693dd
+    path: Assets/Scenes/Gameplay.unity
+    guid: 4aad540d763d80e46bb6e12db060273c
   m_configObjects: {}

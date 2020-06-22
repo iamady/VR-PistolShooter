@@ -5,7 +5,12 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     public int movementSpeed = 1;
+    public static PlayerManager instance;
     // Start is called before the first frame update
+    void Awake()
+    {
+        instance = this;
+    }
     void Start()
     {
         
@@ -14,6 +19,6 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position -= Vector3.forward * Time.deltaTime * movementSpeed;
+        transform.position += Vector3.forward * Time.fixedDeltaTime * movementSpeed;
     }
 }

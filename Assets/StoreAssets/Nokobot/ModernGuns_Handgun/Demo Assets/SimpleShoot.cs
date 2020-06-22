@@ -66,8 +66,8 @@ public class SimpleShoot : MonoBehaviour
         //  GameObject bullet;
         //  bullet = Instantiate(bulletPrefab, barrelLocation.position, barrelLocation.rotation);
         // bullet.GetComponent<Rigidbody>().AddForce(barrelLocation.forward * shotPower);
-
-        currentAmmo--;
+        if (!isEnemy)
+            currentAmmo--;
         // source.PlayOneShot(shotFired);
 
         GameObject tempFlash;
@@ -75,18 +75,20 @@ public class SimpleShoot : MonoBehaviour
         bullet.GetComponent<Rigidbody>().AddForce(barrelLocation.forward * shotPower);
         tempFlash = Instantiate(muzzleFlashPrefab, barrelLocation.position, barrelLocation.rotation);
 
-        // Detect direction of shooting
-        RaycastHit hitInfo;
-        bool hasHit = Physics.Raycast(barrelLocation.position, barrelLocation.forward, out hitInfo, 100);
-
-        if (bulletTrail)
+        if (!isEnemy)
         {
-            GameObject line = Instantiate(bulletTrail);
-            line.GetComponent<LineRenderer>().SetPositions(new Vector3[]{
+            // Detect direction of shooting
+            RaycastHit hitInfo;
+            bool hasHit = Physics.Raycast(barrelLocation.position, barrelLocation.forward, out hitInfo, 100);
+
+            if (bulletTrail)
+            {
+                GameObject line = Instantiate(bulletTrail);
+                line.GetComponent<LineRenderer>().SetPositions(new Vector3[]{
                 barrelLocation.position, hasHit ? hitInfo.point : barrelLocation.position + barrelLocation.forward * 100
                  });
+            }
         }
-
         //Scene object clean up
         Destroy(bullet, 5f);
         Destroy(tempFlash, 1f);
